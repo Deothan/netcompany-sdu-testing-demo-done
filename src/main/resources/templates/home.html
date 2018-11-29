@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>SDU - Math example</title>
+</head>
+<body>
+    <h1>Welcome to the SDU Math program.</h1>
+    <p>This page is capable of doing simple math using doubles.</p>
+
+    <form th:action="@{/calculate}" method="post" th:object="${mathForm}">
+        <input type="number" step="any" class="form-control" th:field="${mathForm.a}" />
+
+        <select class="edit-text" th:field="${mathForm.sign}">
+            <option th:each="sign : ${T(com.netcompany.sdu.testing.testingdemo.model.Sign).values()}" th:value="${sign}" th:text="${sign.name}">Sign</option>
+        </select>
+
+        <input type="number" step="any" class="form-control" th:field="${mathForm.b}" />
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    <h2 class="result" th:if="${result != null}" th:text="${'The result of the calculation is ' + result}"></h2>
+    <h2 th:text="${error}"></h2>
+</body>
+</html>
